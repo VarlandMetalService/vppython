@@ -11,3 +11,9 @@ log/*.log
 
 # Local recipe files
 recipes/*
+
+# Ignore .DS_Store files and other Mac-specific files
+.DS_Store
+._.DS_Store
+**/.DS_Store
+**/._.DS_Store
