@@ -1,0 +1,13 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Config files with sensitive information
+config/*.yaml
+
+# Local log files
+log/*.log
+
+# Local recipe files
+recipes/*
