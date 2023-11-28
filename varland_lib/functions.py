@@ -1,4 +1,5 @@
 # Load dependencies.
+import os
 import sys
 import datetime
 from collections import namedtuple
@@ -10,7 +11,7 @@ def log_error(error):
   msg = f"{timestamp}: {error}"
   try:
     print(f"{msg}", file=sys.stderr)
-    with open(global_config.get('error_log'), 'a') as f:
+    with open(f"{os.getenv('LOCAL_PROJECT_PATH')}{global_config.get('error_log')}", 'a') as f:
       f.write(f"{msg}\n")
   except:
     pass

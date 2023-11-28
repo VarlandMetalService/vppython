@@ -9,7 +9,7 @@ from scp import SCPClient
 class RecipeManager:
 
   def __init__(self, cfg):
-    self.local_dir = cfg.get('local_recipe_dir')
+    self.local_dir = f"{os.getenv('LOCAL_PROJECT_PATH')}{cfg.get('local_recipe_dir')}"
     self.ssh = paramiko.SSHClient()
     self.ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     self.ssh.connect(cfg.get('scp')['server'], username=cfg.get('scp')['username'], password=cfg.get('scp')['password'])
