@@ -30,13 +30,10 @@ def analyze_variable(tag):
   publish_to_influxdb = False
   publish_to_mqtt = (name == "i_Recipes_State")
   is_recipe_variable = False
-  match prefix:
-    case "ao" | "ai" | "do" | "di":
-      publish_to_influxdb = True
-    case _ if "h" in prefix:
-      publish_to_influxdb = True
-    case _ if "m" in prefix:
-      publish_to_mqtt = True
-    case "ri" | "rf" | "rb":
-      is_recipe_variable = True
+  if prefix in ["ao", "ai", "do", "di"] or "h" in prefix:
+    publish_to_influxdb = True
+  if "m" in prefix:
+    publish_to_mqtt = True
+  if prefix in ["ri", "rf", "rb"]:
+    is_recipe_variable = True
   return Variable(tag, program, name, prefix, publish_to_influxdb, publish_to_mqtt, is_recipe_variable)
