@@ -1,6 +1,7 @@
 import paho.mqtt.client as mqtt
 from .functions import log_error
 from varland_lib.recipe_manager import RecipeManager
+from varland_lib.part_spec_retriever import PartSpecRetriever
 
 class MQTTSubscriber:
     
@@ -28,6 +29,7 @@ class MQTTSubscriber:
 
     def on_message(self, client, userdata, msg):
       variable_name = msg.topic.split('/')[-1]
+      tag_name = msg.topic.replace('ab/', '').replace('/', '.')
       match variable_name:
         case 'i_Recipes_State':
           val = int(msg.payload.decode())
@@ -36,6 +38,8 @@ class MQTTSubscriber:
           elif val == 3:
             mgr = RecipeManager(self.cfg)
             mgr.save_to_files()
+        case _ if variable_name.endswith("_ShopOrder"):
+          PartSpecRetriever.get(msg.payload.decode(), tag_name, self.cfg)
 
     def loop_forever(self):
       self.client.loop_forever()
