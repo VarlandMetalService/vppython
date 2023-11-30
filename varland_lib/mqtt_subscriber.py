@@ -24,7 +24,6 @@ class MQTTSubscriber:
         log_error(e)
 
     def on_connect(self, client, userdata, flags, rc):
-      print(f"Connected to MQTT broker at {self.broker_address}:{self.port}. Subscribing to {self.subscribe_to}.")
       self.client.subscribe(self.subscribe_to)
 
     def on_message(self, client, userdata, msg):

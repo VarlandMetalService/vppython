@@ -3,7 +3,7 @@ import time
 from varland_lib import global_config
 from varland_lib.historizer import Historizer
 
-historizer = Historizer(global_config, mqtt=True, influx=True)
+historizer = Historizer(global_config, messages=True)
 while True:
   historizer.historize()
-  time.sleep(global_config.get('influx_metric_delay'))
+  time.sleep(global_config.get('log_delay'))

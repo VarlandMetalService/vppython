@@ -29,7 +29,7 @@ class RecipeManager:
     self.variables = {}
     tag_names = list(self.plc.tags.keys())
     for tag_name in tag_names:
-      variable = analyze_variable(tag_name)
+      variable = analyze_variable(tag_name, tag_names)
       if variable.is_recipe_variable:
         self.tags.append(tag_name)
         self.variables[tag_name] = variable

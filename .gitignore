@@ -5,6 +5,7 @@ __pycache__/
 
 # Config files with sensitive information
 config/*.yaml
+config/*.pem
 .env
 
 # Local log files
