@@ -6,11 +6,12 @@ class MessageTrigger(MessageHandler):
   def __init__(self, cfg, plc, executor, tag, associated_variables, cache):
     super().__init__(cfg, plc, executor, tag)
     self.cache = cache
-    self.tag_values = self.plc.read(*associated_variables)
-    if not isinstance(self.tag_values, list):
-      self.tag_values = [self.tag_values]
-    for tag_val in self.tag_values:
-      self._send_value(tag_val)
+    if associated_variables:
+      self.tag_values = self.plc.read(*associated_variables)
+      if not isinstance(self.tag_values, list):
+        self.tag_values = [self.tag_values]
+      for tag_val in self.tag_values:
+        self._send_value(tag_val)
     self._finish()
 
   def _send_value(self, tag_value):
